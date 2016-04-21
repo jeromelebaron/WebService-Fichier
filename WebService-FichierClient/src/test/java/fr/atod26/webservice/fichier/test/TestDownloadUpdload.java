@@ -54,6 +54,6 @@ public class TestDownloadUpdload {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		log.info("Fin du test");
 	}
 }
