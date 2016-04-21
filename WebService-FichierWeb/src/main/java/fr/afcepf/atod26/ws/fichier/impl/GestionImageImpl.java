@@ -6,12 +6,14 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.jws.WebService;
+import javax.xml.ws.soap.MTOM;
 
 import org.apache.log4j.Logger;
 
 import fr.afcepf.atod26.ws.fichier.IGestionImage;
 
 @WebService(targetNamespace = "http://lebaronjerome.fichier.webservice.atod26.fr", endpointInterface = "fr.afcepf.atod26.ws.fichier.IGestionImage", serviceName = "gestionImage")
+@MTOM
 public class GestionImageImpl implements IGestionImage {
 
 	private Logger log = Logger.getLogger(GestionImageImpl.class);
