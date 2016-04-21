@@ -2,12 +2,14 @@ package fr.afcepf.atod26.ws.fichier.impl;
 
 import java.awt.Image;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.jws.WebService;
 import javax.xml.ws.soap.MTOM;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.log4j.Logger;
 
 import fr.afcepf.atod26.ws.fichier.IGestionImage;
@@ -39,7 +41,20 @@ public class GestionImageImpl implements IGestionImage {
 
 	@Override
 	public String upload(String paramNom, String paramImage) {
-		return null;
+		String message = "Erreur d'upload";
+		String pathImage = getClass().getResource("./").getPath();
+		log.info(pathImage);
+		pathImage = pathImage.split("/WEB-INF")[0];
+		final File fichierImage = new File(pathImage + "/resources/" + paramNom);
+		try {
+			FileOutputStream fileOutputStream = new FileOutputStream(fichierImage);
+			fileOutputStream.write(Base64.decodeBase64(paramImage));
+			fileOutputStream.close();
+			message = "Upload validé";
+		} catch (IOException e) {
+			log.error(e);
+		}
+		return message;
 	}
 
 }
